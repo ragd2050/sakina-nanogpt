@@ -732,8 +732,8 @@ const emotions = [
 // v12: real backend integration. No fake demo order, no setTimeout-simulated
 // responses -- every chat message is a real fetch() to the Flask backend.
 // Change API_BASE if the backend isn't running on localhost:5000.
-// ---------------------------------------------------------------------
-const API_BASE = window.localStorage.getItem('sakina_api_base') || '';
+// -----------------------------------------------------------------
+const API_BASE = '';
 let SESSION_ID = window.localStorage.getItem('sakina_session_id');
 if (!SESSION_ID) {
   SESSION_ID = 'web-' + Math.random().toString(36).slice(2) + Date.now();
