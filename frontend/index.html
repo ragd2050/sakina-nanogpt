@@ -733,7 +733,7 @@ const emotions = [
 // responses -- every chat message is a real fetch() to the Flask backend.
 // Change API_BASE if the backend isn't running on localhost:5000.
 // ---------------------------------------------------------------------
-const API_BASE = window.localStorage.getItem('sakina_api_base') || 'http://localhost:5000';
+const API_BASE = window.localStorage.getItem('sakina_api_base') || '';
 let SESSION_ID = window.localStorage.getItem('sakina_session_id');
 if (!SESSION_ID) {
   SESSION_ID = 'web-' + Math.random().toString(36).slice(2) + Date.now();
@@ -748,9 +748,7 @@ async function checkBackend(){
     if(!res.ok) throw new Error('bad status');
     el.innerHTML = '<span class="status-dot status-ok"></span> متصل بالخادم';
     el.style.color = 'var(--sage-dark)';
-  }catch(err){
-    el.innerHTML = `<span class="status-dot status-off"></span> غير متصل بالخادم (${API_BASE}) — شغّل: python3 backend/app.py`;
-    el.style.color = 'var(--rose-ink)';
+  }catch(err){;
   }
 }
 
