@@ -2,7 +2,7 @@ flask>=3.0
 flask-cors>=4.0
 gunicorn>=22.0
 torch>=2.0
-scikit-learn>=1.3
+scikit-learn==1.8.0
 requests>=2.31
 matplotlib>=3.7
 pytest>=8.0
