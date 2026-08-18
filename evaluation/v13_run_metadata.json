@@ -1,0 +1,12 @@
+{
+  "version": "v13",
+  "timestamp": "2026-08-17T19:32:50.311512+00:00",
+  "classifier_checkpoint": "checkpoints/sakina_emotion_classifier.pkl (unchanged from v12 -- brief section 3: classifier isn't the bottleneck, not touched this pass)",
+  "nanogpt_checkpoint": "checkpoints/sakina_v12.pt (iter 2200) -- retrained from scratch this v13 session, SAME architecture/corpus as v12 (no data/arch change this pass, see Limitations)",
+  "dataset_version": {
+    "emotions_dataset.json": "unchanged from v12 (3,209 single-turn examples)",
+    "conversations_dataset.json": "v12 legacy file, kept, audited -- 99.8% single-turn despite shape (see section G)",
+    "conversations_dataset_v13.json": "NEW this pass -- 1,798 genuine multi-turn conversations"
+  },
+  "git_commit": null
+}

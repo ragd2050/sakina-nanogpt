@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "generated_at": "2026-08-17T18:58:21.407745+00:00",
+    "source_file": "data/conversations_dataset.json",
+    "definition_of_genuine_multiturn": "User->Assistant->User->Assistant (>=2 user turns, >=2 assistant turns, strictly alternating, starts with user)"
+  },
+  "total_conversation_records": 3214,
+  "genuine_multiturn_count": 5,
+  "genuine_multiturn_ratio": 0.0016,
+  "turn_buckets_by_user_turns": {
+    "2-turn": 5,
+    "1-turn": 3209
+  },
+  "average_messages_per_conversation": 2.003,
+  "median_messages_per_conversation": 2.0,
+  "unique_user_prompts": 3218,
+  "total_user_prompts": 3219,
+  "duplicate_conversation_records": 0,
+  "emotion_distribution": {
+    "فرح وشكر": 443,
+    "حيرة وتشتت": 400,
+    "حزن": 357,
+    "قلق وتوتر": 343,
+    "وحدة": 297,
+    "ذنب وتقصير": 266,
+    "فقد وشوق": 234,
+    "شعور بالظلم": 214,
+    "ضغط نفسي": 169,
+    "خوف": 169,
+    "غضب": 168,
+    "فقدان أمل": 154
+  },
+  "source_distribution": {
+    "unspecified": 3214
+  }
+}

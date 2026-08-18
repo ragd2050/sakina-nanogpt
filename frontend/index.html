@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سَكِينَة — طمأنينة لقلبك، ونور من القرآن</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#FAF6EE;
+  --ivory-deep:#F3EEE2;
+  --card:#FFFFFF;
+  --sage:#8FA07E;
+  --sage-dark:#5F7350;
+  --olive:#4E5D3F;
+  --text:#332F27;
+  --text-muted:#8A8377;
+  --text-soft:#A9A296;
+  --border:#E9E2D2;
+  --rose:#F1DFDA;
+  --rose-ink:#8A6459;
+  --lavender:#E4DEEE;
+  --lavender-ink:#6D6087;
+  --blue:#D9E5E7;
+  --blue-ink:#4F6C71;
+  --sand:#F1E6C8;
+  --sand-ink:#8A7231;
+  --sage-bg:#E4EADC;
+  --sage-ink:#4C5D3E;
+  --shadow-sm:0 2px 10px rgba(70,60,30,0.05);
+  --shadow-md:0 10px 32px rgba(60,50,25,0.08);
+  --radius-lg:24px;
+  --radius-md:16px;
+  --radius-sm:10px;
+  --serif:'Amiri', 'Traditional Arabic', serif;
+  --sans:'IBM Plex Sans Arabic','Segoe UI',sans-serif;
+  --sidebar-w:272px;
+}
+html[data-theme="dark"]{
+  --ivory:#20241C;
+  --ivory-deep:#262B1E;
+  --card:#2A2F22;
+  --sage:#93A683;
+  --sage-dark:#B7C6A9;
+  --olive:#CBD6BE;
+  --text:#EDEAE0;
+  --text-muted:#B2AB9C;
+  --text-soft:#83806f;
+  --border:#3A3F2F;
+  --rose:#3C302C;
+  --rose-ink:#DDBBB0;
+  --lavender:#332F3E;
+  --lavender-ink:#C7BEDD;
+  --blue:#26343A;
+  --blue-ink:#B7D4D8;
+  --sand:#3A3420;
+  --sand-ink:#E4CE8B;
+  --sage-bg:#2E3627;
+  --sage-ink:#C7D6BA;
+  --shadow-sm:0 2px 10px rgba(0,0,0,0.25);
+  --shadow-md:0 10px 32px rgba(0,0,0,0.35);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--sans);
+  background:var(--ivory);
+  color:var(--text);
+  min-height:100vh;
+  transition:background .4s ease,color .4s ease;
+  -webkit-font-smoothing:antialiased;
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+input{font-family:inherit;}
+a{color:inherit;text-decoration:none;}
+:focus-visible{outline:2px solid var(--sage-dark);outline-offset:2px;}
+
+/* ---------- layout shell ---------- */
+.app{min-height:100vh;position:relative;}
+
+/* Sidebar - right side */
+.sidebar{
+  position:fixed; top:0; right:0; height:100vh; width:var(--sidebar-w);
+  background:var(--ivory-deep);
+  border-left:1px solid var(--border);
+  display:flex; flex-direction:column;
+  padding:28px 22px 20px;
+  z-index:40;
+  transition:transform .3s ease, background .4s ease;
+}
+.brand{padding:0 4px 6px;}
+.brand-name{font-family:var(--serif);font-size:24px;color:var(--olive);line-height:1;}
+.brand-tagline{font-size:11.5px;color:var(--text-muted);margin-top:6px;line-height:1.5;padding:0 4px;}
+
+.sidebar-divider{height:1px;background:var(--border);margin:22px 0 14px;}
+
+.nav{display:flex;flex-direction:column;gap:3px;flex:1;overflow-y:auto;}
+.nav-item{
+  display:flex; align-items:center; gap:12px;
+  padding:11px 14px; border-radius:12px;
+  font-size:14.5px; color:var(--text-muted); font-weight:500;
+  transition:background .2s, color .2s;
+  text-align:right; width:100%;
+}
+.nav-item svg{width:19px;height:19px;flex-shrink:0;stroke:currentColor;}
+.nav-item:hover{background:var(--sage-bg);color:var(--sage-ink);}
+.nav-item.active{background:var(--sage-bg);color:var(--sage-ink);font-weight:600;}
+
+.reminder-card{
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius-md);
+  padding:16px; margin-top:16px; box-shadow:var(--shadow-sm);
+}
+.reminder-title{font-size:12px; font-weight:600; color:var(--sage-dark); margin-bottom:6px;}
+.reminder-text{font-size:13px; line-height:1.7; color:var(--text-muted);}
+
+.sidebar-bottom{display:flex; flex-direction:column; gap:14px; margin-top:16px;}
+.theme-toggle{
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--card); border:1px solid var(--border); border-radius:100px;
+  padding:8px 14px; font-size:13px; color:var(--text-muted);
+}
+.switch{
+  width:38px;height:22px;border-radius:100px;background:var(--border);
+  position:relative; transition:background .25s;
+}
+.switch::after{
+  content:''; position:absolute; top:3px; right:3px; width:16px;height:16px;
+  border-radius:50%; background:var(--card); transition:right .25s; box-shadow:var(--shadow-sm);
+}
+html[data-theme="dark"] .switch{background:var(--sage-dark);}
+html[data-theme="dark"] .switch::after{right:19px;}
+
+.sidebar-footer{font-size:11px; color:var(--text-soft); text-align:center;}
+.status-dot{display:inline-block; width:7px;height:7px;border-radius:50%; margin-inline-end:2px;}
+.status-dot.status-ok{background:var(--sage-dark);}
+.status-dot.status-off{background:var(--rose-ink);}
+
+/* ---------- main ---------- */
+.main{margin-right:var(--sidebar-w); min-height:100vh; display:flex; flex-direction:column;}
+
+.topbar{
+  display:flex; align-items:center; gap:16px;
+  padding:18px 36px; border-bottom:1px solid var(--border);
+  position:sticky; top:0; background:rgba(250,246,238,.86); backdrop-filter:blur(10px);
+  z-index:20;
+}
+html[data-theme="dark"] .topbar{background:rgba(32,36,28,.86);}
+.search-bar{
+  flex:1; display:flex; align-items:center; gap:10px;
+  background:var(--card); border:1px solid var(--border); border-radius:100px;
+  padding:8px 16px; max-width:380px; transition:border-color .2s, box-shadow .2s;
+}
+.search-bar:focus-within{border-color:var(--sage-dark); box-shadow:0 0 0 3px rgba(95,115,80,.12);}
+.search-bar svg{width:15px;height:15px;stroke:var(--text-soft);flex-shrink:0;}
+.search-bar input{flex:1;background:none;border:none;font-size:13px;color:var(--text);}
+.search-bar input::placeholder{color:var(--text-soft);}
+.icon-btn{
+  width:40px;height:40px;border-radius:50%; display:flex;align-items:center;justify-content:center;
+  background:var(--card); border:1px solid var(--border); position:relative;
+  transition:background .2s;
+}
+.icon-btn:hover{background:var(--sage-bg);}
+.icon-btn svg{width:18px;height:18px;stroke:var(--text-muted);}
+.hamburger{display:none;}
+
+.view{display:none; padding:36px; flex:1; max-width:1180px; margin:0 auto; width:100%;}
+.view.active{display:block; animation:fadein .35s ease;}
+@keyframes fadein{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+.section-head{margin-bottom:26px;}
+.section-title{font-family:var(--serif); font-size:25px; color:var(--olive); font-weight:700;}
+.section-sub{font-size:13.5px; color:var(--text-muted); margin-top:6px; line-height:1.7;}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative; border-radius:28px; overflow:hidden;
+  background:linear-gradient(135deg, var(--sage-bg) 0%, var(--ivory-deep) 60%, var(--blue) 130%);
+  padding:64px 56px; margin-bottom:40px; isolation:isolate;
+}
+.hero::before{
+  content:''; position:absolute; inset:0; z-index:-1;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(255,255,255,.5), transparent 45%),
+    radial-gradient(circle at 15% 90%, rgba(95,115,80,.14), transparent 50%);
+}
+.hero-leaf{position:absolute; left:38px; top:50%; width:220px; opacity:.55; animation:sway 9s ease-in-out infinite; transform-origin:bottom center;}
+@keyframes sway{0%,100%{transform:rotate(-3deg) translateY(0);}50%{transform:rotate(3deg) translateY(-6px);}}
+.hero-content{max-width:560px; position:relative;}
+.hero h1{font-family:var(--serif); font-size:38px; color:var(--olive); font-weight:700; line-height:1.35;}
+.hero p{margin-top:16px; font-size:15px; color:var(--text-muted); line-height:1.9; max-width:460px;}
+.hero-ctas{display:flex; gap:12px; margin-top:30px; flex-wrap:wrap;}
+.btn{
+  padding:13px 26px; border-radius:100px; font-size:14px; font-weight:600;
+  display:inline-flex; align-items:center; gap:8px; transition:transform .2s, box-shadow .2s;
+}
+.btn-primary{background:var(--sage-dark); color:#fff; box-shadow:0 8px 20px rgba(95,115,80,.28);}
+.btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(95,115,80,.34);}
+.btn-ghost{background:var(--card); color:var(--olive); border:1px solid var(--border);}
+.btn-ghost:hover{transform:translateY(-2px); background:var(--sage-bg);}
+
+/* ---------- feature cards row ---------- */
+.grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:44px;}
+.grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:20px; margin-bottom:40px;}
+.feature-card{
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg);
+  padding:26px; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; gap:14px;
+  transition:transform .25s, box-shadow .25s;
+}
+.feature-card:hover{transform:translateY(-4px); box-shadow:var(--shadow-md);}
+.feature-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--sage-bg);}
+.feature-icon svg{width:20px;height:20px;stroke:var(--sage-ink);}
+.feature-card h3{font-size:14px; font-weight:600; color:var(--text-muted);}
+.verse-ar{font-family:var(--serif); font-size:19px; line-height:2; color:var(--text);}
+.verse-ref{font-size:12px; color:var(--sage-dark); font-weight:600;}
+.card-msg{font-size:14px; line-height:1.9; color:var(--text);}
+.card-actions{display:flex; align-items:center; gap:10px; margin-top:auto; padding-top:6px;}
+.link-btn{font-size:12.5px; font-weight:600; color:var(--sage-dark); display:flex; align-items:center; gap:5px;}
+.link-btn svg{width:14px;height:14px;stroke:currentColor;}
+.reciter-row{display:flex; align-items:center; gap:10px; margin-top:4px;}
+.mini-select{
+  flex:1; border:1px solid var(--border); border-radius:10px; padding:8px 12px; font-size:12.5px;
+  background:var(--ivory); color:var(--text-muted);
+}
+.play-btn{width:36px;height:36px;border-radius:50%; background:var(--sage-dark); color:#fff; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:opacity .2s;}
+.play-btn svg{width:14px;height:14px; fill:#fff; stroke:none;}
+.play-btn:disabled{opacity:.6;}
+.btn-spinner{width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;animation:spin .7s linear infinite;}
+
+/* ---------- emotion library ---------- */
+.emo-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-bottom:20px;}
+.emo-grid-compact{grid-template-columns:repeat(4,1fr); margin-bottom:36px;}
+.emo-card{
+  border-radius:var(--radius-lg); padding:22px 18px; text-align:center; border:1px solid transparent;
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+  transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  min-height:154px; justify-content:center;
+}
+.emo-card:hover{transform:translateY(-5px); box-shadow:var(--shadow-md); border-color:rgba(0,0,0,.05);}
+.emo-icon-wrap{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.emo-icon-wrap svg{width:22px;height:22px;stroke:currentColor;}
+.emo-title{font-size:14.5px; font-weight:700;}
+.emo-sub{font-size:12px; line-height:1.6; opacity:.8; max-width:22ch;}
+
+/* CTA below emotion library / other sections */
+.mini-cta{
+  display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg);
+  padding:26px 30px; margin:8px 0 30px;
+}
+.mini-cta-text h4{font-size:15px; font-weight:700; margin-bottom:6px; color:var(--text);}
+.mini-cta-text p{font-size:13px; color:var(--text-muted); line-height:1.7; max-width:44ch;}
+
+/* ---------- bottom value section ---------- */
+.value-row{display:grid; grid-template-columns:repeat(4,1fr); gap:24px; padding:36px 8px; border-top:1px solid var(--border); margin-top:12px;}
+.value-item{text-align:center;}
+.value-icon{width:38px;height:38px;margin:0 auto 12px; display:flex;align-items:center;justify-content:center; border-radius:10px; background:var(--sage-bg);}
+.value-icon svg{width:18px;height:18px;stroke:var(--sage-ink);}
+.value-item h4{font-size:14px; font-weight:600; margin-bottom:6px;}
+.value-item p{font-size:12.5px; color:var(--text-muted); line-height:1.7;}
+
+.footer-note{
+  text-align:center; font-size:12px; color:var(--text-soft); padding:26px 10px 8px; line-height:1.8;
+  border-top:1px solid var(--border); margin-top:20px;
+}
+
+/* ---------- emotion detail ---------- */
+.back-link{display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--text-muted); margin-bottom:18px;}
+.back-link svg{width:15px;height:15px;stroke:currentColor;}
+.detail-hero{
+  border-radius:var(--radius-lg); padding:34px 40px; margin-bottom:30px;
+  display:flex; align-items:center; gap:18px;
+}
+.detail-hero .emo-icon-wrap{width:56px;height:56px; background:rgba(255,255,255,.6);}
+.detail-hero .emo-icon-wrap svg{width:26px;height:26px;}
+.detail-hero h2{font-family:var(--serif); font-size:26px; font-weight:700;}
+.detail-hero p{font-size:13px; color:var(--text-muted); margin-top:4px;}
+
+.detail-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:start;}
+.panel{background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:28px; box-shadow:var(--shadow-sm); margin-bottom:22px;}
+.panel h3{font-size:13.5px; font-weight:700; color:var(--sage-dark); margin-bottom:16px;}
+.verse-block{padding:18px 0; border-bottom:1px dashed var(--border);}
+.verse-block:last-child{border-bottom:none;}
+.verse-block .verse-ar{margin-bottom:8px;}
+.reflect-label{display:inline-block; font-size:11px; font-weight:600; color:var(--lavender-ink); background:var(--lavender); padding:4px 10px; border-radius:100px; margin-bottom:10px;}
+.reflect-text{font-size:13.5px; line-height:1.9; color:var(--text-muted);}
+.audio-box{display:flex; align-items:center; gap:14px;}
+.waveform{flex:1; height:32px; display:flex; align-items:center; gap:2px;}
+.waveform span{width:3px; background:var(--sage); border-radius:2px; opacity:.55;}
+.audio-meta{display:flex; justify-content:space-between; font-size:11px; color:var(--text-soft); margin-top:8px;}
+.audio-controls-row{display:flex; align-items:center; gap:12px; margin-top:14px;}
+
+.share-card-preview{
+  border-radius:20px; padding:30px 24px; text-align:center; position:relative; overflow:hidden;
+  background:linear-gradient(160deg, var(--sage-bg), var(--ivory-deep));
+  border:1px solid var(--border);
+}
+.share-card-preview .verse-ar{font-size:18px; margin-bottom:14px;}
+.share-card-preview .mark{font-family:var(--serif); font-size:13px; color:var(--sage-dark); margin-top:16px;}
+.share-actions{display:flex; gap:8px; margin-top:16px; flex-wrap:wrap;}
+.btn-sm{padding:9px 16px; border-radius:100px; font-size:12.5px; font-weight:600;}
+
+/* ---------- chat ---------- */
+.chat-wrap{display:flex; flex-direction:column; height:calc(100vh - 154px); max-width:820px; margin:0 auto;}
+.chat-header{padding-bottom:16px; border-bottom:1px solid var(--border); margin-bottom:18px;}
+.chat-header h2{font-family:var(--serif); font-size:22px; color:var(--olive);}
+.chat-header p{font-size:13px; color:var(--text-muted); margin-top:5px;}
+.chat-scroll{flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:18px; padding-bottom:12px;}
+.msg-row{display:flex; gap:10px;}
+.msg-row.user{align-self:flex-start; flex-direction:row-reverse; max-width:64%;}
+.msg-row.bot{align-self:flex-end; max-width:72%;}
+.avatar{width:32px;height:32px;border-radius:50%; flex-shrink:0; display:flex;align-items:center;justify-content:center; background:var(--sage-bg);}
+.avatar svg{width:16px;height:16px;stroke:var(--sage-ink);}
+.bubble{border-radius:18px; padding:14px 18px; font-size:14px; line-height:1.85;}
+.msg-row.user .bubble{background:var(--sage-dark); color:#fff; border-bottom-left-radius:4px;}
+.msg-row.bot .bubble{background:var(--card); border:1px solid var(--border); border-bottom-right-radius:4px;}
+.bot-result{max-width:88%; align-self:flex-end; display:flex; flex-direction:column; gap:12px;}
+.badge{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; padding:6px 12px; border-radius:100px; align-self:flex-end;}
+.result-block{background:var(--card); border:1px solid var(--border); border-radius:18px; padding:18px 20px; box-shadow:var(--shadow-sm);}
+.result-block .block-label{font-size:11px; font-weight:700; color:var(--text-soft); margin-bottom:8px; letter-spacing:.2px;}
+.result-block p{font-size:13.5px; line-height:1.85; color:var(--text);}
+.quran-block{background:var(--sage-bg); border:1px solid var(--border);}
+.quran-block .block-label{color:var(--sage-ink);}
+.quran-block .verse-ar{font-size:18px; margin:4px 0 10px; line-height:2.1;}
+.quran-block .verse-ref{display:block;}
+.reflect-block{background:var(--sand); border:1px solid var(--border);}
+.reflect-block .block-label{color:var(--sand-ink);}
+.followup-text{font-size:13px; color:var(--text-muted); padding:0 4px;}
+.typing{display:flex; gap:4px; padding:14px 18px;}
+.typing span{width:6px;height:6px;border-radius:50%;background:var(--text-soft); animation:blink 1.2s infinite;}
+.typing span:nth-child(2){animation-delay:.2s;} .typing span:nth-child(3){animation-delay:.4s;}
+@keyframes blink{0%,80%,100%{opacity:.25;}40%{opacity:1;}}
+
+/* quick prompt chips */
+.quick-prompts{display:flex; flex-wrap:wrap; gap:8px; margin:4px 0 4px 42px;}
+.chip{
+  padding:8px 16px; border-radius:100px; font-size:12.5px; font-weight:500;
+  background:var(--card); border:1px solid var(--sage); color:var(--sage-dark);
+  transition:background .2s, transform .15s;
+}
+.chip:hover{background:var(--sage-bg); transform:translateY(-1px);}
+
+.chat-input-row{display:flex; align-items:center; gap:10px; margin-top:16px; background:var(--card); border:1px solid var(--border); border-radius:20px; padding:6px 6px 6px 8px;}
+.chat-input-row input{flex:1; border:none; background:none; padding:12px 16px; font-size:14px; color:var(--text);}
+.chat-input-row input::placeholder{color:var(--text-soft);}
+.chat-input-row:focus-within{border-color:var(--sage-dark); box-shadow:0 0 0 3px rgba(95,115,80,.12);}
+.send-btn{width:42px;height:42px; border-radius:50%; background:var(--sage-dark); display:flex;align-items:center;justify-content:center; flex-shrink:0; transition:background .2s, opacity .2s;}
+.send-btn svg{width:17px;height:17px; stroke:#fff;}
+.send-btn:disabled{opacity:.5; cursor:default;}
+.send-btn .spinner{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ---------- quran page ---------- */
+.quran-toolbar{display:flex; gap:12px; margin-bottom:24px;}
+.surah-list{display:grid; grid-template-columns:repeat(2,1fr); gap:12px;}
+.surah-row{
+  display:flex; align-items:center; justify-content:space-between; gap:14px;
+  background:var(--card); border:1px solid var(--border); border-radius:16px; padding:16px 18px;
+}
+.surah-left{display:flex; align-items:center; gap:14px;}
+.surah-num{width:34px;height:34px;border-radius:10px; background:var(--sage-bg); color:var(--sage-ink); display:flex;align-items:center;justify-content:center; font-size:12px; font-weight:700; flex-shrink:0;}
+.surah-name{font-family:var(--serif); font-size:16px; font-weight:700;}
+.surah-meta{font-size:11.5px; color:var(--text-soft); margin-top:2px;}
+.icon-mini{width:32px;height:32px;border-radius:50%; display:flex; align-items:center; justify-content:center; border:1px solid var(--border);}
+.icon-mini svg{width:14px;height:14px; stroke:var(--text-muted);}
+
+/* ---------- mood history ---------- */
+.mood-chart{display:flex; align-items:flex-end; gap:16px; height:180px; padding:20px 10px 0;}
+.bar-col{flex:1; display:flex; flex-direction:column; align-items:center; gap:10px;}
+.bar{width:100%; max-width:34px; border-radius:8px 8px 3px 3px; background:var(--sage-bg);}
+.bar-label{font-size:11px; color:var(--text-soft);}
+.freq-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:20px;}
+.pill{padding:8px 16px; border-radius:100px; font-size:12.5px; font-weight:600; display:flex; align-items:center; gap:8px;}
+.pill-dot{width:7px;height:7px;border-radius:50%;}
+.saved-list{display:flex; flex-direction:column; gap:12px;}
+.saved-row{display:flex; align-items:center; justify-content:space-between; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px 18px;}
+.saved-row .verse-ar{font-size:14.5px;}
+
+/* utility bg classes */
+.bg-sage{background:var(--sage-bg); color:var(--sage-ink);}
+.bg-rose{background:var(--rose); color:var(--rose-ink);}
+.bg-lav{background:var(--lavender); color:var(--lavender-ink);}
+.bg-blue{background:var(--blue); color:var(--blue-ink);}
+.bg-sand{background:var(--sand); color:var(--sand-ink);}
+
+/* mobile */
+.mobile-bottom-nav{display:none;}
+@media (max-width:980px){
+  .sidebar{transform:translateX(100%); box-shadow:var(--shadow-md);}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-right:0;}
+  .hamburger{display:flex;}
+  .grid-3{grid-template-columns:1fr;}
+  .grid-2{grid-template-columns:1fr;}
+  .emo-grid{grid-template-columns:repeat(2,1fr);}
+  .emo-grid-compact{grid-template-columns:repeat(2,1fr);}
+  .detail-grid{grid-template-columns:1fr;}
+  .value-row{grid-template-columns:repeat(2,1fr);}
+  .surah-list{grid-template-columns:1fr;}
+  .hero{padding:44px 26px;}
+  .hero h1{font-size:28px;}
+  .hero-leaf{display:none;}
+  .view{padding:20px;}
+  .topbar{padding:14px 18px;}
+  .msg-row.user{max-width:88%;} .msg-row.bot{max-width:88%;}
+  .bot-result{max-width:96%;}
+  .quick-prompts{margin-inline-start:0;}
+  .mini-cta{flex-direction:column; align-items:flex-start;}
+  .mobile-bottom-nav{
+    display:flex; position:fixed; bottom:0; right:0; left:0; height:64px; background:var(--card);
+    border-top:1px solid var(--border); z-index:30; align-items:center; justify-content:space-around;
+  }
+  .mobile-bottom-nav button{display:flex; flex-direction:column; align-items:center; gap:3px; font-size:10px; color:var(--text-soft);}
+  .mobile-bottom-nav button.active{color:var(--sage-dark);}
+  .mobile-bottom-nav svg{width:19px;height:19px; stroke:currentColor;}
+  body{padding-bottom:64px;}
+}
+@media (max-width:640px){.emo-grid{grid-template-columns:1fr 1fr;} .search-bar{max-width:none;} }
+
+/* ---------- empty states ---------- */
+.empty-state{
+  display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px;
+  padding:56px 20px; border:1px dashed var(--border); border-radius:var(--radius-lg);
+}
+.empty-state svg{width:38px;height:38px;stroke:var(--text-soft); stroke-width:1.4;}
+.empty-state h4{font-size:15px; font-weight:700; color:var(--text);}
+.empty-state p{font-size:13px; color:var(--text-muted); max-width:36ch; line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-name">سَكِينَة</div>
+    </div>
+    <div class="brand-tagline">طمأنينة لقلبك، ونور من القرآن</div>
+    <div class="sidebar-divider"></div>
+    <nav class="nav" id="nav">
+      <button class="nav-item active" data-view="home"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 11l8-6 8 6v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1v-8Z"/></svg>الرئيسية</button>
+      <button class="nav-item" data-view="chat"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 12a8 8 0 1 1 3.2 6.4L4 20l1.2-3.4A7.96 7.96 0 0 1 4 12Z"/></svg>محادثة سكينة</button>
+      <button class="nav-item" data-view="library"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 21s-7-4.35-9.5-8.5C.7 8.8 2.5 5 6.2 5c2 0 3.4 1 4.8 2.6C12.4 6 13.8 5 15.8 5c3.7 0 5.5 3.8 3.7 7.5C17 16.65 12 21 12 21Z"/></svg>مكتبة المشاعر</button>
+      <button class="nav-item" data-view="quran"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v18H6.5A2.5 2.5 0 0 1 4 18.5v-13Z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v18h5.5a2.5 2.5 0 0 0 2.5-2.5v-13Z"/></svg>القرآن الكريم</button>
+      <button class="nav-item" data-view="favorites"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 20.5s-7.5-4.6-9.8-9.4C.6 7.4 2.7 4 6.3 4c2 0 3.6 1.1 5.7 3.5C14.1 5.1 15.7 4 17.7 4c3.6 0 5.7 3.4 4.1 7.1-2.3 4.8-9.8 9.4-9.8 9.4Z"/></svg>المفضلة</button>
+      <button class="nav-item" data-view="cards"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="6" width="14" height="10" rx="2"/><path d="M7 18h14a2 2 0 0 0 2-2V8"/></svg>بطاقاتي</button>
+      <button class="nav-item" data-view="mood"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 20V10M11 20V4M18 20v-7"/></svg>سجل المشاعر</button>
+      <button class="nav-item" data-view="settings"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.6 2 3.4 2.4-1c.6.5 1.3.9 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2Z"/></svg>الإعدادات</button>
+    </nav>
+
+    <div class="reminder-card">
+      <div class="reminder-title">تذكير لطيف</div>
+      <div class="reminder-text">أنت لست وحدك، والله معك أينما كنت.</div>
+    </div>
+
+    <div class="sidebar-bottom">
+      <button class="theme-toggle" id="themeToggle">
+        <span>الوضع الليلي</span>
+        <span class="switch"></span>
+      </button>
+      <div class="sidebar-footer">© سكينة ٢٠٢٦ — جميع الحقوق محفوظة</div>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <div class="main">
+    <div class="topbar">
+      <button class="hamburger icon-btn" id="hamburgerBtn" aria-label="فتح القائمة">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.6"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div class="search-bar" id="topSearchWrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="topSearchInput" placeholder="ابحث عن شعور..." aria-label="ابحث عن شعور">
+      </div>
+    </div>
+
+    <!-- ================= HOME VIEW ================= -->
+    <section class="view active" id="view-home">
+      <div class="hero">
+        <svg class="hero-leaf" viewBox="0 0 200 260" fill="none"><path d="M100 250C40 210 20 140 55 70 75 30 100 15 100 15s25 15 45 55c35 70 15 140-45 180Z" stroke="var(--sage-dark)" stroke-width="1.3" fill="rgba(143,160,126,.12)"/><path d="M100 15v235" stroke="var(--sage-dark)" stroke-width="1.1"/></svg>
+        <div class="hero-content">
+          <h1>مرحبًا بك في سكينة</h1>
+          <p>مساحة هادئة للتعبير عما تشعر به، مع دعم مناسب وآيات مختارة بعناية.</p>
+          <div class="hero-ctas">
+            <button class="btn btn-primary" onclick="switchView('chat')">ابدأ محادثة</button>
+            <button class="btn btn-ghost" onclick="switchView('library')">استكشف المشاعر</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-head" style="margin-bottom:16px;">
+        <div class="section-sub" style="font-size:14px; font-weight:600; color:var(--text);">أو اختر الشعور الأقرب لك</div>
+      </div>
+      <div class="emo-grid emo-grid-compact" id="homeEmoGrid"></div>
+
+      <div class="grid-2" style="margin-top:8px;">
+        <div class="feature-card">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v18H6.5A2.5 2.5 0 0 1 4 18.5v-13Z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v18h5.5a2.5 2.5 0 0 0 2.5-2.5v-13Z"/></svg></div>
+          <h3>آية اليوم</h3>
+          <div class="verse-ar">﴿ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ ﴾</div>
+          <div class="verse-ref">سورة الرعد — الآية ٢٨</div>
+          <div id="homeAudioPlayer" style="margin-top:14px;"></div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 21s-7-4.35-9.5-8.5C.7 8.8 2.5 5 6.2 5c2 0 3.4 1 4.8 2.6C12.4 6 13.8 5 15.8 5c3.7 0 5.5 3.8 3.7 7.5C17 16.65 12 21 12 21Z"/></svg></div>
+          <h3>رسالة لقلبك</h3>
+          <p class="card-msg" id="homeMsg">لا تحمل الغد فوق قلبك قبل أن يأتي؛ يكفيك من اليوم يومك.</p>
+          <div class="card-actions">
+            <button class="link-btn" onclick="cycleHomeMsg()"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 12a9 9 0 1 1-2.6-6.3M21 4v5h-5"/></svg>رسالة أخرى</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="value-row">
+        <div class="value-item"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 21s-7-4.35-9.5-8.5C.7 8.8 2.5 5 6.2 5c2 0 3.4 1 4.8 2.6C12.4 6 13.8 5 15.8 5c3.7 0 5.5 3.8 3.7 7.5C17 16.65 12 21 12 21Z"/></svg></div><h4>كلام من القلب</h4><p>عبارات إنسانية تلامس مشاعرك</p></div>
+        <div class="value-item"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v18H6.5A2.5 2.5 0 0 1 4 18.5v-13Z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v18h5.5a2.5 2.5 0 0 0 2.5-2.5v-13Z"/></svg></div><h4>آيات مختارة بعناية</h4><p>من القرآن الكريم لتهدئة قلبك</p></div>
+        <div class="value-item"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2.5"/></svg></div><h4>تدبر وفهم أعمق</h4><p>لمعاني الآيات في حياتك اليومية</p></div>
+        <div class="value-item"><div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.3 10.7 15.7 6.3M8.3 13.3l7.4 4.4"/></svg></div><h4>شارك الأثر</h4><p>انشر الخير وكن سبباً في الأجر</p></div>
+      </div>
+
+      <div class="footer-note">سَكِينَة مساحة للدعم والتأمل، وليست بديلاً عن المساعدة الطبية أو النفسية المتخصصة.</div>
+    </section>
+
+    <!-- ================= EMOTION LIBRARY VIEW ================= -->
+    <section class="view" id="view-library">
+      <div class="section-head">
+        <div class="section-title">مكتبة المشاعر</div>
+        <div class="section-sub">اختر ما تشعر به الآن لنرافقك بآية ورسالة وتدبر يناسب حالتك</div>
+      </div>
+      <div class="emo-grid" id="libraryEmoGrid"></div>
+      <div class="mini-cta">
+        <div class="mini-cta-text">
+          <h4>ما لقيت الشعور الأقرب لك؟</h4>
+          <p>اكتب ما تشعر به كما هو، وسكينة ستساعدك على فهمه واختيار ما يناسبك.</p>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="switchView('chat')">ابدأ محادثة</button>
+      </div>
+    </section>
+
+    <!-- ================= EMOTION DETAIL VIEW ================= -->
+    <section class="view" id="view-detail"></section>
+
+    <!-- ================= CHAT VIEW ================= -->
+    <section class="view" id="view-chat">
+      <div class="chat-wrap">
+        <div class="chat-header">
+          <h2>محادثة سكينة</h2>
+          <p>اكتب ما تشعر به كما هو، وسأختار لك ما يناسب حالتك  .</p>
+          <div id="backendStatus" class="section-sub" style="margin-top:6px;"></div>
+        </div>
+        <div class="chat-scroll" id="chatScroll">
+          <div class="msg-row bot">
+            <div class="avatar"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M20 33c7-3 11-9 10-17-4 2-8 1-10-3-2 4-6 5-10 3-1 8 3 14 10 17Z" transform="translate(-8,-13) scale(0.55)"/></svg></div>
+            <div class="bubble">أهلًا بك، أنا هنا لأستمع لك. اكتب ما في قلبك كما هو.</div>
+          </div>
+          <div class="quick-prompts" id="quickPrompts"></div>
+        </div>
+        <div class="chat-input-row">
+          <input type="text" id="chatInput" placeholder="اكتب ما تشعر به..." aria-label="اكتب ما تشعر به">
+          <button class="send-btn" id="sendBtn" aria-label="إرسال"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 12l16-7-6 16-3-6-7-3Z"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= QURAN VIEW ================= -->
+    <section class="view" id="view-quran">
+      <div class="section-head">
+        <div class="section-title">القرآن الكريم</div>
+        <div class="section-sub">تصفح السور، استمع، واحفظ ما يطمئن قلبك</div>
+      </div>
+      <div class="quran-toolbar">
+        <div class="search-bar" style="max-width:100%">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" id="surahSearchInput" placeholder="ابحث باسم السورة..." aria-label="ابحث باسم السورة">
+        </div>
+      </div>
+      <div class="surah-list" id="surahList"></div>
+    </section>
+
+    <!-- ================= FAVORITES VIEW ================= -->
+    <section class="view" id="view-favorites">
+      <div class="section-head">
+        <div class="section-title">المفضلة</div>
+        <div class="section-sub">الآيات والرسائل التي حفظتها لتعود إليها</div>
+      </div>
+      <div class="saved-list" id="favList"></div>
+    </section>
+
+    <!-- ================= CARDS (شارك الأثر) VIEW ================= -->
+    <section class="view" id="view-cards">
+      <div class="section-head">
+        <div class="section-title">بطاقاتي</div>
+        <div class="section-sub">شارك الأثر — بطاقات جاهزة بمقاسات إنستغرام وواتساب</div>
+      </div>
+      <div class="detail-grid">
+        <div>
+          <div class="panel">
+            <h3>البطاقات المحفوظة</h3>
+            <div class="saved-list" id="cardsList"></div>
+          </div>
+        </div>
+        <div>
+          <div class="share-card-preview">
+            <div class="verse-ar">﴿ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ ﴾</div>
+            <div class="verse-ref">سورة الرعد — الآية ٢٨</div>
+            <p class="card-msg" id="cardsPreviewMsg" style="margin-top:14px;">ليس مطلوباً منك أن تعرف كيف ستنتهي الأمور، يكفي أن تعرف أن الله لن يتركك وحدك فيها.</p>
+            <div class="mark">سَكِينَة</div>
+            <div class="share-actions" style="justify-content:center;">
+              <button class="btn-sm btn-primary" onclick="saveCard('﴿ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ ﴾', 'سورة الرعد — الآية ٢٨', document.getElementById('cardsPreviewMsg').textContent)">حفظ في بطاقاتي</button>
+            </div>
+          </div>
+          <div class="section-sub" style="margin-top:14px; text-align:center;">مقاسات مهيأة لقصص إنستغرام (1080×1920) وواتساب (1080×1080) — التحميل والمشاركة المباشرة قيد التطوير</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= MOOD HISTORY VIEW ================= -->
+    <section class="view" id="view-mood">
+      <div class="section-head">
+        <div class="section-title">سجل المشاعر</div>
+        <div class="section-sub">نظرة هادئة على مشاعرك خلال الأسبوع — دون أي تشخيص أو أحكام</div>
+      </div>
+      <div id="moodEmpty"></div>
+      <div id="moodPanels">
+        <div class="panel">
+          <h3>نظرة أسبوعية (عدد المحادثات لكل يوم)</h3>
+          <div class="mood-chart" id="moodChart"></div>
+        </div>
+        <div class="panel">
+          <h3>المشاعر الأكثر تكراراً</h3>
+          <div class="freq-row" id="freqRow"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SETTINGS VIEW ================= -->
+    <section class="view" id="view-settings">
+      <div class="section-head">
+        <div class="section-title">الإعدادات</div>
+        <div class="section-sub">خصص تجربتك في سكينة</div>
+      </div>
+      <div class="panel">
+        <h3>التفضيلات</h3>
+        <div class="saved-row"><span>الوضع الليلي</span><span class="switch" onclick="toggleTheme()"></span></div>
+        <div class="saved-row" style="margin-top:10px;"><span>القارئ الافتراضي</span><select class="mini-select" id="defaultReciterSelect" style="max-width:200px;"><option>جارٍ التحميل...</option></select></div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<div class="mobile-bottom-nav" id="mobileNav">
+  <button data-view="home" class="active"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 11l8-6 8 6v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1v-8Z"/></svg>الرئيسية</button>
+  <button data-view="chat"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 12a8 8 0 1 1 3.2 6.4L4 20l1.2-3.4A7.96 7.96 0 0 1 4 12Z"/></svg>محادثة</button>
+  <button data-view="library"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 21s-7-4.35-9.5-8.5C.7 8.8 2.5 5 6.2 5c2 0 3.4 1 4.8 2.6C12.4 6 13.8 5 15.8 5c3.7 0 5.5 3.8 3.7 7.5C17 16.65 12 21 12 21Z"/></svg>المشاعر</button>
+  <button data-view="quran"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v18H6.5A2.5 2.5 0 0 1 4 18.5v-13Z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v18h5.5a2.5 2.5 0 0 0 2.5-2.5v-13Z"/></svg>القرآن</button>
+  <button data-view="mood"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 20V10M11 20V4M18 20v-7"/></svg>سجلي</button>
+</div>
+
+<script>
+/* ============ DATA ============ */
+/* v13 UI pass: icons rebuilt as meaningful line icons (no faces, no
+   mismatched abstract shapes -- see brief section 3/48), short subtitle
+   per card added, and the 3 emotions missing from the UI relative to the
+   backend's 12-class taxonomy (خوف / غضب / ضغط نفسي) added, with verse
+   text copied exactly from data/quran_verses.json for consistency. */
+const emotions = [
+  {id:'anxious', title:'قلق وتوتر', sub:'أفكار كثيرة وشعور بعدم الهدوء', bg:'bg-sage',
+    icon:'<path d="M3 12h4l2-7 4 14 2-7h6"/>',
+    verses:[{id:'13:28', ar:'﴿ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ ﴾', ref:'سورة الرعد — الآية ٢٨'},{id:'16:89', ar:'﴿ وَنَزَّلْنَا عَلَيْكَ الْكِتَابَ تِبْيَانًا لِّكُلِّ شَيْءٍ ﴾', ref:'سورة النحل — الآية ٨٩ (مقتطف من الآية)'}],
+    messages:['ليس مطلوباً منك أن تعرف كيف ستنتهي الأمور، يكفي أن تعرف أن الله لن يتركك وحدك فيها.','القلق ضيف يمر، فلا تفتح له كل الأبواب، ودع لقلبك مكاناً للسكينة.','خذ نفساً عميقاً، فما أثقل عليك اليوم، الله أقدر عليه منك.'],
+    reflection:'الطمأنينة لا تأتي من زوال الأسباب، بل من يقين القلب بأن الله قريب مهما اشتد القلق.'},
+  {id:'sad', title:'حزن', sub:'ثقل في القلب وحاجة لمساحة هادئة', bg:'bg-blue',
+    icon:'<path d="M18 9a5 5 0 0 0-9.6-1.8A4.5 4.5 0 0 0 7 16h11a4 4 0 0 0 0-8h-.2"/><path d="M9 19v1M13 19v2M17 19v1"/>',
+    verses:[{id:'12:86', ar:'﴿ إِنَّمَا أَشْكُو بَثِّي وَحُزْنِي إِلَى اللَّهِ ﴾', ref:'سورة يوسف — الآية ٨٦'},{id:'9:40', ar:'﴿ لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا ﴾', ref:'سورة التوبة — الآية ٤٠ (مقتطف من الآية)'}],
+    messages:['ما انكسر داخلك اليوم قد يرممه الله بطريقة لم تخطر لك.','حزنك ليس ضعفاً، بل دليل على قلب حي يشعر، فاسمح له أن يبكي ثم يهدأ.','الأنبياء حزنوا قبلك، وما كان حزنهم إلا طريقاً إلى قربٍ أعمق من الله.'],
+    reflection:'يعقوب عليه السلام لم يُلَم على حزنه، بل وُجّه إلى الشكوى إلى الله وحده — فالحزن حين يُوضع عند الله يخف.'},
+  {id:'hopeless', title:'فقدان أمل', sub:'إحساس بأن الطريق أصبح مظلماً', bg:'bg-sand',
+    icon:'<path d="M3 17h18M6 17a6 6 0 0 1 12 0"/><path d="M12 3v4M5 7l2 2M19 7l-2 2"/>',
+    verses:[{id:'94:5', ar:'﴿ فَإِنَّ مَعَ الْعُسْرِ يُسْرًا ﴾', ref:'سورة الشرح — الآية ٥'},{id:'39:53', ar:'﴿ قُلْ يَا عِبَادِيَ الَّذِينَ أَسْرَفُوا عَلَىٰ أَنفُسِهِمْ لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ ﴾', ref:'سورة الزمر — الآية ٥٣'}],
+    messages:['اليأس ليس محطة نهائية، إنه فقط لحظة تحتاج أن تتنفس فيها قبل أن تكمل.','الفرج أحياناً يأتي من حيث لا تحسب، فلا تُغلق الباب قبل أن يُفتح.','ثقتك بالله لا تحتاج أن تفهم كل شيء، يكفي أن تستمر خطوة واحدة.'],
+    reflection:'وعد "مع العسر يسرا" جاء مكرراً في الآيات، إشارة إلى أن اليسر ملازم للعسر لا بعده فقط.'},
+  {id:'joyful', title:'فرح وشكر', sub:'امتنان وسعادة تستحق أن تُروى', bg:'bg-sage',
+    icon:'<path d="M4 17h16"/><path d="M8 17a4 4 0 0 1 8 0"/><path d="M12 8v2.3M8.6 9.7l1.5 1.5M15.4 9.7l-1.5 1.5"/>',
+    verses:[{id:'14:7', ar:'﴿ لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ ﴾', ref:'سورة إبراهيم — الآية ٧ (مقتطف من الآية)'},{id:'93:11', ar:'﴿ وَأَمَّا بِنِعْمَةِ رَبِّكَ فَحَدِّثْ ﴾', ref:'سورة الضحى — الآية ١١'}],
+    messages:['افرح بهذه اللحظة كما هي، فالشكر أجمل ما يُستقبل به الخير.','النعمة تكبر حين تُروى وتُشكر، فلا تجعلها تمر بصمت.','فرحك اليوم صدقة على قلبك، فاستمتع به دون خجل.'],
+    reflection:'الشكر ليس كلمة تُقال، بل حال يظهر أثره في القلب واللسان والعمل.'},
+  {id:'confused', title:'حيرة وتشتت', sub:'خيارات كثيرة وصعوبة في القرار', bg:'bg-lav',
+    icon:'<path d="M12 20V13M12 13 6 6M12 13l6-6M6 6v4M18 6v4"/>',
+    verses:[{id:'65:2', ar:'﴿ وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا ﴾', ref:'سورة الطلاق — الآية ٢ (مقتطف من الآية)'},{id:'94:8', ar:'﴿ وَإِلَىٰ رَبِّكَ فَارْغَب ﴾', ref:'سورة الشرح — الآية ٨'}],
+    messages:['ليس عليك أن تملك كل الإجابات الآن، بعض الطرق تتضح بالخطوة لا بالتفكير وحده.','استخر الله، ثم امضِ بقلب مطمئن أياً كان القرار.','الحيرة أحياناً هي بداية النضج، لا علامة ضعف.'],
+    reflection:'الاستخارة ليست طلب رؤيا، بل تسليم القلب لمن يعلم ما لا نعلم.'},
+  {id:'lonely', title:'وحدة', sub:'شعور بالانعزال حتى وسط الناس', bg:'bg-blue',
+    icon:'<circle cx="12" cy="8" r="3.3"/><path d="M6 20c1.2-3.5 3.6-5.1 6-5.1s4.8 1.6 6 5.1"/>',
+    verses:[{id:'2:186', ar:'﴿ وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ ﴾', ref:'سورة البقرة — الآية ١٨٦ (مقتطف من الآية)'},{id:'13:28', ar:'﴿ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ ﴾', ref:'سورة الرعد — الآية ٢٨'}],
+    messages:['أنت لست وحدك، والله معك أينما كنت، حتى في اللحظات التي تشعر فيها أن لا أحد يفهمك.','الوحدة أحياناً دعوة للسكون مع الله قبل أن تكون فراغاً.','قربه منك لا يحتاج وسيطاً، فقط ادعُه كما أنت.'],
+    reflection:'القرب في الآية جاء بلا واسطة "فإني قريب" — إشارة إلى أن الوحدة من الناس لا تعني بُعداً عن الله.'},
+  {id:'guilt', title:'ذنب وتقصير', sub:'ندم على تقصير يثقل الضمير', bg:'bg-rose',
+    icon:'<path d="M4 12a8 8 0 1 1 2.5 5.8"/><path d="M4 17v-4h4"/>',
+    verses:[{id:'39:53', ar:'﴿ قُلْ يَا عِبَادِيَ الَّذِينَ أَسْرَفُوا عَلَىٰ أَنفُسِهِمْ لَا تَقْنَطُوا مِنْ رَحْمَةِ اللَّهِ ﴾', ref:'سورة الزمر — الآية ٥٣'},{id:'4:40', ar:'﴿ إِنَّ اللَّهَ لَا يَظْلِمُ مِثْقَالَ ذَرَّةٍ ﴾', ref:'سورة النساء — الآية ٤٠'}],
+    messages:['تقصيرك لا يُلغي رحمة الله، بل هو الطريق إلى بابها.','كل عودة صادقة إلى الله تُمحى بها آثار الأمس.','لا تُتقن الحزن على الذنب وتنسى إتقان التوبة منه.'],
+    reflection:'الآية نزلت لتفتح باب الرجاء لا لتبرر التقصير — التوبة تبدأ بالاعتراف وتنتهي بالعمل.'},
+  {id:'loss', title:'فقد وشوق', sub:'مكان فارغ وذكرى لا تغيب', bg:'bg-sand',
+    icon:'<circle cx="5" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/><path d="M8.2 12h7.6" stroke-dasharray="2.2 3"/>',
+    verses:[{id:'2:156', ar:'﴿ إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ ﴾', ref:'سورة البقرة — الآية ١٥٦ (مقتطف من الآية)'},{id:'12:86', ar:'﴿ إِنَّمَا أَشْكُو بَثِّي وَحُزْنِي إِلَى اللَّهِ ﴾', ref:'سورة يوسف — الآية ٨٦'}],
+    messages:['الشوق إلى من فقدناهم دليل حب لم ينته، وهو نفسه سبب في الدعاء لهم.','ما كان لله لا يضيع، وما فقدته هنا سيُرد إليك في موعد أجمل.','احمل ذكراهم بامتنان لا بحسرة وحدها.'],
+    reflection:'الرجوع إلى الله في الآية تسلية للقلب: الفقد ليس نهاية العلاقة، بل انتقال إلى موعد آخر.'},
+  {id:'fear', title:'خوف', sub:'قلق من مجهول أو موقف قادم', bg:'bg-lav',
+    icon:'<path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6l-7-3Z"/><path d="M12 9v4M12 15.5v.01"/>',
+    verses:[{id:'20:46', ar:'﴿ لَا تَخَافَا إِنَّنِي مَعَكُمَا أَسْمَعُ وَأَرَىٰ ﴾', ref:'سورة طه — الآية ٤٦'},{id:'3:173', ar:'﴿ حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ ﴾', ref:'سورة آل عمران — الآية ١٧٣ (مقتطف من الآية)'}],
+    messages:['الخوف شعور طبيعي أمام المجهول، ولا يعني أنك عاجز عن مواجهته.','الله معك في اللحظة التي تخاف فيها أكثر مما تتخيل.','خطوة صغيرة رغم الخوف أفضل من الجمود الكامل.'],
+    reflection:'المؤمن لا يُطلب منه ألا يخاف، بل ألا يستسلم للخوف — فالطمأنينة تأتي من التوكل لا من غياب الخطر.'},
+  {id:'anger', title:'غضب', sub:'انفعال قوي يحتاج مساحة ليهدأ', bg:'bg-rose',
+    icon:'<path d="M12 3c2 3 1 4-.5 5.5S9 11 9 13a3 3 0 0 0 6 0c0-1-.4-1.6-1-2"/><path d="M12 17v3"/>',
+    verses:[{id:'3:134', ar:'﴿ وَالْكَاظِمِينَ الْغَيْظَ وَالْعَافِينَ عَنِ النَّاسِ ﴾', ref:'سورة آل عمران — الآية ١٣٤ (مقتطف من الآية)'},{id:'42:37', ar:'﴿ وَإِذَا مَا غَضِبُوا هُمْ يَغْفِرُونَ ﴾', ref:'سورة الشورى — الآية ٣٧ (مقتطف من الآية)'}],
+    messages:['غضبك رسالة تخبرك أن شيئاً يهمك تجاوز حده، تنفّس قبل أن تتصرف.','امنح نفسك دقائق قبل الرد، فالهدوء بعد الغضب يحفظ لك أشياء كثيرة.','لك الحق أن تغضب مما جرى، المهم كيف تتصرف بعده.'],
+    reflection:'كظم الغيظ في القرآن لم يوصف كضعف، بل كصفة من صفات المتقين الذين يملكون أنفسهم عند الغضب.'},
+  {id:'pressure', title:'ضغط نفسي', sub:'أعباء متراكمة فوق طاقتك', bg:'bg-sage',
+    icon:'<rect x="5" y="4" width="14" height="4" rx="1.3"/><rect x="5" y="10" width="14" height="4" rx="1.3"/><rect x="5" y="16" width="14" height="4" rx="1.3"/>',
+    verses:[{id:'2:286', ar:'﴿ لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا ﴾', ref:'سورة البقرة — الآية ٢٨٦ (مقتطف من الآية)'},{id:'94:5', ar:'﴿ فَإِنَّ مَعَ الْعُسْرِ يُسْرًا ﴾', ref:'سورة الشرح — الآية ٥'}],
+    messages:['الضغط يتراكم أحياناً دون أن نشعر، فامنح نفسك مساحة صغيرة للتنفس.','لست مضطراً لإنجاز كل شيء اليوم، رتّب أولوياتك وابدأ بخطوة واحدة.','الله لا يحمّلك فوق طاقتك، فلا تحمّل نفسك أنت أكثر مما ينبغي.'],
+    reflection:'وعد الله بأنه لا يكلف نفساً إلا وسعها يعني أن ما تشعر بثقله الآن أنت فعلاً قادر على حمله، ولو بخطوات صغيرة.'},
+  {id:'injustice', title:'شعور بالظلم', sub:'إحساس بأن حقاً لك قد ضاع', bg:'bg-rose',
+    icon:'<path d="M12 4v16M6 8h12M6 8 3 13a3 3 0 0 0 6 0L6 8ZM18 8l-3 5a3 3 0 0 0 6 0l-3-5Z"/>',
+    verses:[{id:'4:40', ar:'﴿ إِنَّ اللَّهَ لَا يَظْلِمُ مِثْقَالَ ذَرَّةٍ ﴾', ref:'سورة النساء — الآية ٤٠'},{id:'4:148', ar:'﴿ لَّا يُحِبُّ اللَّهُ الْجَهْرَ بِالسُّوءِ مِنَ الْقَوْلِ إِلَّا مَن ظُلِمَ ﴾', ref:'سورة النساء — الآية ١٤٨'}],
+    messages:['ما تشعر به من ظلم شعور حقيقي، ومن حقك أن يُسمع.','ليس عليك أن تتقبل الظلم بصمت، من حقك أن تطالب بما يعيد إليك اعتبارك بالطرق المناسبة.','حسبك أن تعلم أن الله يرى ما لا يراه الناس.'],
+    reflection:'الآية تذكّر بأن العدل الإلهي دقيق حتى بمقدار الذرة — فلا ظلم يضيع دون أن يُحاسب عليه صاحبه.'}
+];
+
+// ---------------------------------------------------------------------
+// v12: real backend integration. No fake demo order, no setTimeout-simulated
+// responses -- every chat message is a real fetch() to the Flask backend.
+// Change API_BASE if the backend isn't running on localhost:5000.
+// ---------------------------------------------------------------------
+const API_BASE = window.localStorage.getItem('sakina_api_base') || 'http://localhost:5000';
+let SESSION_ID = window.localStorage.getItem('sakina_session_id');
+if (!SESSION_ID) {
+  SESSION_ID = 'web-' + Math.random().toString(36).slice(2) + Date.now();
+  window.localStorage.setItem('sakina_session_id', SESSION_ID);
+}
+let cachedReciters = null;
+
+async function checkBackend(){
+  const el = document.getElementById('backendStatus');
+  try{
+    const res = await fetch(`${API_BASE}/api/health`, {method:'GET'});
+    if(!res.ok) throw new Error('bad status');
+    el.innerHTML = '<span class="status-dot status-ok"></span> متصل بالخادم';
+    el.style.color = 'var(--sage-dark)';
+  }catch(err){
+    el.innerHTML = `<span class="status-dot status-off"></span> غير متصل بالخادم (${API_BASE}) — شغّل: python3 backend/app.py`;
+    el.style.color = 'var(--rose-ink)';
+  }
+}
+
+async function fetchReciters(){
+  if(cachedReciters) return cachedReciters;
+  try{
+    const res = await fetch(`${API_BASE}/api/reciters`);
+    const data = await res.json();
+    if(data.success){ cachedReciters = data.reciters; return cachedReciters; }
+    return null;
+  }catch(err){ return null; }
+}
+
+// Shared, real audio player component -- used in both the chat result
+// cards and the Emotion Library detail pages (per spec: same feature,
+// reused). No fake waveform, no fake static reciter list: reciters are
+// fetched from /api/reciters, or the control shows a clear "unavailable"
+// state instead of pretending to work.
+let audioPlayerSeq = 0;
+
+function audioPlayerHTML(verseId){
+  const uid = 'audio-' + (audioPlayerSeq++);
+
+  setTimeout(() => initAudioPlayer(uid, verseId), 0);
+
+  return `
+    <div class="audio-box" id="${uid}" data-verse-id="${verseId}">
+
+      <div class="audio-reciter-info">
+        <span class="section-sub" style="margin:0;">
+          مشاري راشد العفاسي
+        </span>
+      </div>
+
+      <button
+        type="button"
+        class="play-btn"
+        aria-label="تشغيل التلاوة"
+        title="تشغيل التلاوة"
+        disabled
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <polygon points="7 4 20 12 7 20 7 4"></polygon>
+        </svg>
+      </button>
+
+      <span class="audio-status section-sub" style="margin:0;">
+        جارٍ تحميل التلاوة...
+      </span>
+
+    </div>
+
+    <audio
+      id="${uid}-el"
+      preload="none"
+      style="display:none;">
+    </audio>
+  `;
+}
+
+async function initAudioPlayer(uid, verseId){
+
+  const container =
+    document.getElementById(uid);
+
+  const audio =
+    document.getElementById(`${uid}-el`);
+
+  if (!container || !audio) {
+    return;
+  }
+
+  const playBtn =
+    container.querySelector('.play-btn');
+
+  const status =
+    container.querySelector('.audio-status');
+
+  // مشاري راشد العفاسي فقط
+  const recitationId = 7;
+
+
+  function setPlayIcon(){
+
+    playBtn.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <polygon points="7 4 20 12 7 20 7 4"></polygon>
+      </svg>
+    `;
+
+    playBtn.setAttribute(
+      'aria-label',
+      'تشغيل التلاوة'
+    );
+
+    playBtn.title =
+      'تشغيل التلاوة';
+  }
+
+
+  function setPauseIcon(){
+
+    playBtn.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <rect
+          x="6.5"
+          y="5"
+          width="4"
+          height="14"
+          rx="1">
+        </rect>
+
+        <rect
+          x="13.5"
+          y="5"
+          width="4"
+          height="14"
+          rx="1">
+        </rect>
+      </svg>
+    `;
+
+    playBtn.setAttribute(
+      'aria-label',
+      'إيقاف التلاوة مؤقتًا'
+    );
+
+    playBtn.title =
+      'إيقاف مؤقت';
+  }
+
+
+  function setStatus(message = ''){
+
+    if (status) {
+      status.textContent = message;
+    }
+  }
+
+
+  try {
+
+    const response =
+      await fetch(
+        `/api/audio?verse_id=${encodeURIComponent(
+          verseId
+        )}&recitation_id=${recitationId}`
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (
+      !response.ok ||
+      !data.success ||
+      !data.audio_url
+    ) {
+
+      throw new Error(
+        data.error ||
+        'Audio URL not available'
+      );
+    }
+
+
+    audio.src =
+      data.audio_url;
+
+    audio.load();
+
+
+    playBtn.disabled =
+      false;
+
+
+    setStatus('');
+
+    setPlayIcon();
+
+
+  } catch (error) {
+
+    console.error(
+      'Audio loading error:',
+      error
+    );
+
+
+    playBtn.disabled =
+      true;
+
+
+    setStatus(
+      'تعذر تحميل التلاوة الآن'
+    );
+
+    return;
+  }
+
+
+  /* ========== PLAY / PAUSE ========== */
+
+  playBtn.addEventListener(
+    'click',
+    async function(){
+
+      try {
+
+        if (audio.paused) {
+
+          await audio.play();
+
+          setStatus('');
+
+          setPauseIcon();
+
+        } else {
+
+          audio.pause();
+
+          setStatus('');
+
+          setPlayIcon();
+        }
+
+      } catch (error) {
+
+        console.error(
+          'Audio playback error:',
+          error
+        );
+
+
+        if (audio.paused) {
+
+          setStatus(
+            'تعذر تشغيل التلاوة الآن'
+          );
+        }
+      }
+    }
+  );
+
+
+  /* عندما يبدأ الصوت */
+  audio.addEventListener(
+    'play',
+    function(){
+
+      setStatus('');
+
+      setPauseIcon();
+    }
+  );
+
+
+  /* عندما يوقف المستخدم الصوت */
+  audio.addEventListener(
+    'pause',
+    function(){
+
+      if (!audio.ended) {
+        setPlayIcon();
+      }
+    }
+  );
+
+
+  /* عندما تنتهي الآية */
+  audio.addEventListener(
+    'ended',
+    function(){
+
+      audio.currentTime = 0;
+
+      setStatus('');
+
+      setPlayIcon();
+    }
+  );
+
+
+  /* خطأ حقيقي في ملف الصوت */
+  audio.addEventListener(
+    'error',
+    function(){
+
+      console.error(
+        'Audio element error:',
+        audio.error
+      );
+
+      setStatus(
+        'تعذر تحميل التلاوة الآن'
+      );
+
+      setPlayIcon();
+    }
+  );
+}
+/* ============ RENDER EMOTION GRIDS ============ */
+function emoCardHTML(e){
+  return `<button class="emo-card ${e.bg}" onclick="openEmotion('${e.id}')">
+    <div class="emo-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${e.icon}</svg></div>
+    <div class="emo-title">${e.title}</div>
+    <div class="emo-sub">${e.sub}</div>
+  </button>`;
+}
+document.getElementById('homeEmoGrid').innerHTML = emotions.slice(0,4).map(e=>emoCardHTML(e)).join('');
+document.getElementById('libraryEmoGrid').innerHTML = emotions.map(e=>emoCardHTML(e)).join('');
+
+/* ============ EMOTION DETAIL ============ */
+function openEmotion(id){
+  const e = emotions.find(x=>x.id===id);
+  const msgIndex = {i:0};
+  e._msgIndex = e._msgIndex || 0;
+  const detail = document.getElementById('view-detail');
+  detail.innerHTML = `
+    <button class="back-link" onclick="switchView('library')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>رجوع إلى مكتبة المشاعر</button>
+    <div class="detail-hero ${e.bg}">
+      <div class="emo-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${e.icon}</svg></div>
+      <div><h2>${e.title}</h2><p>آيات ورسائل مختارة لتهدئة قلبك في هذه اللحظة</p></div>
+    </div>
+    <div class="detail-grid">
+      <div>
+        <div class="panel">
+          <h3>آيات مختارة لك</h3>
+          ${e.verses.map(v=>{
+            const fav = isFavorited(v.id);
+            return `<div class="verse-block">
+              <div class="verse-ar">${v.ar}</div>
+              <div style="display:flex; align-items:center; justify-content:space-between;">
+                <div class="verse-ref">${v.ref}</div>
+                <button class="link-btn" onclick="toggleFavorite('${v.id}', \`${v.ar}\`, \`${v.ref}\`, this)">
+                  <svg viewBox="0 0 24 24" fill="${fav?'var(--rose-ink)':'none'}" stroke="var(--rose-ink)" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-9.8-9.4C.6 7.4 2.7 4 6.3 4c2 0 3.6 1.1 5.7 3.5C14.1 5.1 15.7 4 17.7 4c3.6 0 5.7 3.4 4.1 7.1-2.3 4.8-9.8 9.4-9.8 9.4Z"/></svg>
+                  ${fav ? 'في المفضلة' : 'أضف للمفضلة'}
+                </button>
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+        <div class="panel">
+          <h3>رسائل لقلبك</h3>
+          <p class="card-msg" id="detailMsg" style="font-size:15px;">${e.messages[0]}</p>
+          <div class="card-actions" style="margin-top:16px;">
+            <button class="btn btn-ghost btn-sm" onclick="cycleDetailMsg('${e.id}')"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-left:6px;"><path d="M21 12a9 9 0 1 1-2.6-6.3M21 4v5h-5"/></svg>أعطني رسالة أخرى</button>
+          </div>
+        </div>
+        <div class="panel">
+          <span class="reflect-label">تدبر قصير — وليس تفسيراً رسمياً</span>
+          <p class="reflect-text">${e.reflection}</p>
+        </div>
+      </div>
+      <div>
+        <div class="panel">
+          <h3>استمع للآية</h3>
+          ${audioPlayerHTML(e.verses[0].id)}
+        </div>
+        <div class="panel share-card-preview" style="padding:26px 22px;">
+          <div class="verse-ar" style="font-size:16px;">${e.verses[0].ar}</div>
+          <div class="verse-ref">${e.verses[0].ref}</div>
+          <p class="card-msg" id="detailShareMsg" style="margin-top:12px; font-size:13px;">${e.messages[0]}</p>
+          <div class="mark">سَكِينَة</div>
+          <div class="share-actions" style="justify-content:center;">
+            <button class="btn-sm btn-ghost" onclick="saveCard(\`${e.verses[0].ar}\`, \`${e.verses[0].ref}\`, document.getElementById('detailShareMsg').textContent)">حفظ في بطاقاتي</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  switchView('detail', true);
+}
+function cycleDetailMsg(id){
+  const e = emotions.find(x=>x.id===id);
+  e._msgIndex = ((e._msgIndex||0)+1) % e.messages.length;
+  document.getElementById('detailMsg').textContent = e.messages[e._msgIndex];
+}
+
+/* ============ HOME MESSAGE CYCLER ============ */
+let homeMsgs = ['لا تحمل الغد فوق قلبك قبل أن يأتي؛ يكفيك من اليوم يومك.','ما انكسر داخلك اليوم قد يرممه الله بطريقة لم تخطر لك.','ليس مطلوباً منك أن تعرف كيف ستنتهي الأمور، يكفي أن تعرف أن الله لن يتركك وحدك فيها.'];
+let homeMsgIdx=0;
+function cycleHomeMsg(){ homeMsgIdx=(homeMsgIdx+1)%homeMsgs.length; document.getElementById('homeMsg').textContent = homeMsgs[homeMsgIdx]; }
+
+/* ============ QURAN LIST ============ */
+const surahs = [
+  {num:2, name:'البقرة', ayat:286}, {num:12, name:'يوسف', ayat:111}, {num:13, name:'الرعد', ayat:43},
+  {num:18, name:'الكهف', ayat:110}, {num:36, name:'يس', ayat:83}, {num:55, name:'الرحمن', ayat:78},
+  {num:67, name:'الملك', ayat:30}, {num:93, name:'الضحى', ayat:11}, {num:94, name:'الشرح', ayat:8}, {num:112, name:'الإخلاص', ayat:4}
+];
+document.getElementById('surahList').innerHTML = surahs.map(s=>`
+  <div class="surah-row" data-name="${s.name}">
+    <div class="surah-left">
+      <div class="surah-num">${s.num}</div>
+      <div><div class="surah-name">سورة ${s.name}</div><div class="surah-meta">${s.ayat} آية</div></div>
+    </div>
+  </div>`).join('');
+document.getElementById('surahSearchInput').addEventListener('input', e=>{
+  const q = e.target.value.trim();
+  document.querySelectorAll('#surahList .surah-row').forEach(row=>{
+    row.style.display = row.dataset.name.includes(q) ? '' : 'none';
+  });
+});
+
+/* Topbar search: filters the Emotion Library grid by title or subtitle. */
+document.getElementById('topSearchInput').addEventListener('input', e=>{
+  const q = e.target.value.trim();
+  document.querySelectorAll('#libraryEmoGrid .emo-card').forEach((card, i)=>{
+    const em = emotions[i];
+    const match = !q || em.title.includes(q) || em.sub.includes(q);
+    card.style.display = match ? '' : 'none';
+  });
+  if(q) switchView('library');
+});
+
+/* ============ REAL PERSISTENCE (localStorage) ============
+   No backend database exists for these features, so v13 UI pass makes
+   them genuinely real via localStorage instead of always showing static
+   demo content pulled from the emotions array. Empty states render when
+   there's nothing saved yet, per spec section 26. */
+const LS_FAV = 'sakina_favorites';
+const LS_CARDS = 'sakina_cards';
+const LS_MOOD = 'sakina_mood_log';
+
+function lsGet(key){ try{ return JSON.parse(window.localStorage.getItem(key) || '[]'); }catch(e){ return []; } }
+function lsSet(key, val){ window.localStorage.setItem(key, JSON.stringify(val)); }
+
+function isFavorited(verseId){ return lsGet(LS_FAV).some(f=>f.verseId===verseId); }
+function toggleFavorite(verseId, verseAr, verseRef, btn){
+  let favs = lsGet(LS_FAV);
+  const idx = favs.findIndex(f=>f.verseId===verseId);
+  if(idx>-1){ favs.splice(idx,1); } else { favs.unshift({verseId, verseAr, verseRef, savedAt:Date.now()}); }
+  lsSet(LS_FAV, favs);
+  if(btn) btn.classList.toggle('is-fav', idx===-1);
+  renderFavorites();
+}
+function removeFavorite(verseId){
+  lsSet(LS_FAV, lsGet(LS_FAV).filter(f=>f.verseId!==verseId));
+  renderFavorites();
+}
+
+function saveCard(verseAr, verseRef, message){
+  const cards = lsGet(LS_CARDS);
+  cards.unshift({id:'card-'+Date.now(), verseAr, verseRef, message, savedAt:Date.now()});
+  lsSet(LS_CARDS, cards);
+  renderCards();
+}
+function removeCard(id){
+  lsSet(LS_CARDS, lsGet(LS_CARDS).filter(c=>c.id!==id));
+  renderCards();
+}
+
+function logMood(emotion){
+  const log = lsGet(LS_MOOD);
+  const today = new Date().toISOString().slice(0,10);
+  log.push({date:today, emotion});
+  lsSet(LS_MOOD, log.slice(-500)); // cap growth
+}
+
+const emptyStateSVG = '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M4 7h16M7 7V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/></svg>';
+
+function renderFavorites(){
+  const el = document.getElementById('favList'); if(!el) return;
+  const favs = lsGet(LS_FAV);
+  if(!favs.length){
+    el.innerHTML = `<div class="empty-state">${emptyStateSVG}<h4>لا توجد عناصر محفوظة بعد</h4><p>يمكنك حفظ الآيات والرسائل للعودة إليها لاحقًا.</p><button class="btn btn-primary btn-sm" onclick="switchView('library')">استكشف مكتبة المشاعر</button></div>`;
+    return;
+  }
+  el.innerHTML = favs.map(f=>`
+    <div class="saved-row"><div><div class="verse-ar">${f.verseAr}</div><div class="verse-ref">${f.verseRef}</div></div>
+    <button class="icon-mini" aria-label="إزالة من المفضلة" onclick="removeFavorite('${f.verseId}')"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rose-ink)" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-9.8-9.4C.6 7.4 2.7 4 6.3 4c2 0 3.6 1.1 5.7 3.5C14.1 5.1 15.7 4 17.7 4c3.6 0 5.7 3.4 4.1 7.1-2.3 4.8-9.8 9.4-9.8 9.4Z" fill="var(--rose-ink)"/></svg></button></div>`).join('');
+}
+
+function renderCards(){
+  const el = document.getElementById('cardsList'); if(!el) return;
+  const cards = lsGet(LS_CARDS);
+  if(!cards.length){
+    el.innerHTML = `<div class="empty-state">${emptyStateSVG}<h4>لا توجد بطاقات محفوظة بعد</h4><p>احفظ بطاقة من محادثة أو من مكتبة المشاعر لتظهر هنا.</p><button class="btn btn-primary btn-sm" onclick="switchView('library')">استكشف مكتبة المشاعر</button></div>`;
+    return;
+  }
+  el.innerHTML = cards.map(c=>`
+    <div class="saved-row"><div><div class="verse-ar" style="font-size:13.5px;">${c.verseAr}</div><div class="verse-ref">${c.verseRef}</div></div>
+    <button class="icon-mini" aria-label="حذف البطاقة" onclick="removeCard('${c.id}')"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 7h16M7 7V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/></svg></button></div>`).join('');
+}
+
+const WEEKDAYS_AR = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+const MOOD_COLORS = {'bg-sage':'sage','bg-blue':'blue','bg-sand':'sand','bg-lav':'lav','bg-rose':'rose'};
+function renderMood(){
+  const chartEl = document.getElementById('moodChart');
+  const freqEl = document.getElementById('freqRow');
+  const panelWrap = document.getElementById('moodPanels');
+  if(!chartEl) return;
+  const log = lsGet(LS_MOOD);
+  if(!log.length){
+    panelWrap.style.display = 'none';
+    document.getElementById('moodEmpty').innerHTML = `<div class="empty-state">${emptyStateSVG}<h4>لا يوجد سجل مشاعر بعد</h4><p>بعد أول محادثة مع سكينة، ستظهر هنا نظرة هادئة على مشاعرك بمرور الوقت.</p><button class="btn btn-primary btn-sm" onclick="switchView('chat')">ابدأ محادثة</button></div>`;
+    return;
+  }
+  panelWrap.style.display = '';
+  document.getElementById('moodEmpty').innerHTML = '';
+
+  // last 7 calendar days, counting entries per day (bar height = count, capped)
+  const now = new Date();
+  const days = [];
+  for(let i=6;i>=0;i--){
+    const d = new Date(now); d.setDate(now.getDate()-i);
+    const key = d.toISOString().slice(0,10);
+    const count = log.filter(l=>l.date===key).length;
+    days.push({d:WEEKDAYS_AR[d.getDay()], v:count});
+  }
+  const maxV = Math.max(1, ...days.map(d=>d.v));
+  chartEl.innerHTML = days.map(d=>`
+    <div class="bar-col"><div class="bar bg-sage" style="height:${Math.max(6,(d.v/maxV)*100)}%;" title="${d.v} محادثة"></div><div class="bar-label">${d.d}</div></div>`).join('');
+
+  const counts = {};
+  log.forEach(l=>{ counts[l.emotion] = (counts[l.emotion]||0)+1; });
+  const top = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,4);
+  const palette = ['var(--sage-dark)','var(--sand-ink)','var(--lavender-ink)','var(--blue-ink)'];
+  freqEl.innerHTML = top.map(([emotion],i)=>
+    `<div class="pill" style="background:var(--card); border:1px solid var(--border); color:var(--text);"><span class="pill-dot" style="background:${palette[i%palette.length]}"></span>${emotion}</div>`
+  ).join('');
+}
+
+/* ============ VIEW SWITCHING ============ */
+function switchView(name, skipNavUpdate){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  if(!skipNavUpdate){
+    document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active', b.dataset.view===name));
+    document.querySelectorAll('.mobile-bottom-nav button').forEach(b=>b.classList.toggle('active', b.dataset.view===name));
+  } else {
+    document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active', b.dataset.view==='library'));
+  }
+  document.getElementById('sidebar').classList.remove('open');
+  if(name==='favorites') renderFavorites();
+  if(name==='cards') renderCards();
+  if(name==='mood') renderMood();
+  if(name==='settings') populateDefaultReciterSelect();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+document.getElementById('nav').addEventListener('click', e=>{
+  const btn = e.target.closest('.nav-item'); if(!btn) return;
+  switchView(btn.dataset.view);
+});
+document.getElementById('mobileNav').addEventListener('click', e=>{
+  const btn = e.target.closest('button'); if(!btn) return;
+  switchView(btn.dataset.view);
+});
+document.getElementById('hamburgerBtn').addEventListener('click', ()=> document.getElementById('sidebar').classList.toggle('open'));
+
+/* ============ THEME TOGGLE ============ */
+function toggleTheme(){
+  const html = document.documentElement;
+  html.setAttribute('data-theme', html.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
+}
+document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+/* ============ CHAT: real backend integration ============ */
+document.getElementById('sendBtn').addEventListener('click', ()=>sendChat());
+document.getElementById('chatInput').addEventListener('keydown', e=>{ if(e.key==='Enter') sendChat(); });
+checkBackend();
+document.getElementById('homeAudioPlayer').innerHTML = audioPlayerHTML('13:28');
+
+/* Quick prompt chips -- text only, no emoji. Clicking sends directly. */
+const QUICK_PROMPTS = ['أشعر بالقلق', 'أحتاج أفضفض', 'أنا محتارة', 'أشعر بالوحدة'];
+document.getElementById('quickPrompts').innerHTML = QUICK_PROMPTS.map(p=>`<button class="chip" onclick="sendChat('${p}')">${p}</button>`).join('');
+
+const BOT_AVATAR_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M20 33c7-3 11-9 10-17-4 2-8 1-10-3-2 4-6 5-10 3-1 8 3 14 10 17Z" transform="translate(-8,-13) scale(0.55)"/></svg>';
+
+async function sendChat(presetText){
+  const input = document.getElementById('chatInput');
+  const text = (presetText !== undefined ? presetText : input.value).trim();
+  if(!text) return;
+  const scroll = document.getElementById('chatScroll');
+  const sendBtn = document.getElementById('sendBtn');
+
+  scroll.insertAdjacentHTML('beforeend', `<div class="msg-row user"><div class="avatar"><svg viewBox="0 0 24 24" fill="none" stroke="var(--sage-ink)" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1.3-3.6 4-5.5 7-5.5s5.7 1.9 7 5.5"/></svg></div><div class="bubble">${escapeHTML(text)}</div></div>`);
+  input.value='';
+  document.getElementById('quickPrompts').innerHTML = ''; // only shown before the first message
+  scroll.scrollTop = scroll.scrollHeight;
+
+  // Prevent duplicate sends while a request is in flight.
+  sendBtn.disabled = true;
+  input.disabled = true;
+  const sendBtnOriginal = sendBtn.innerHTML;
+  sendBtn.innerHTML = '<span class="spinner"></span>';
+
+  const typingId = 'typing-'+Date.now();
+  scroll.insertAdjacentHTML('beforeend', `<div class="msg-row bot" id="${typingId}"><div class="avatar">${BOT_AVATAR_SVG}</div><div class="bubble typing"><span></span><span></span><span></span></div></div>`);
+  scroll.scrollTop = scroll.scrollHeight;
+
+  let data;
+  try{
+    const res = await fetch(`${API_BASE}/api/chat`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({message: text, session_id: SESSION_ID}),
+    });
+    data = await res.json();
+    if(!data.success) throw new Error(data.error || 'unknown backend error');
+  }catch(err){
+    document.getElementById(typingId).remove();
+    scroll.insertAdjacentHTML('beforeend', `<div class="msg-row bot"><div class="avatar">${BOT_AVATAR_SVG}</div><div class="bubble">تعذّر الاتصال بسكينة الآن. حاول مرة أخرى بعد قليل.</div></div>`);
+    scroll.scrollTop = scroll.scrollHeight;
+    checkBackend();
+    sendBtn.disabled = false; input.disabled = false; sendBtn.innerHTML = sendBtnOriginal; input.focus();
+    return;
+  }
+
+  document.getElementById(typingId).remove();
+  sendBtn.disabled = false; input.disabled = false; sendBtn.innerHTML = sendBtnOriginal; input.focus();
+
+  // Safety response: distinct styling, no verse/emotion card.
+  if(data.is_safety_response){
+    scroll.insertAdjacentHTML('beforeend', `<div class="msg-row bot"><div class="avatar">${BOT_AVATAR_SVG}</div><div class="bubble" style="border:1px solid var(--rose-ink); background:var(--rose);">${escapeHTML(data.response)}</div></div>`);
+    scroll.scrollTop = scroll.scrollHeight;
+    return;
+  }
+
+  // Clarification: lightweight bubble only -- no emotion badge, no Quran
+  // card, no reflection, no audio, until the meaning is clearer (spec section 20).
+  if(data.needs_clarification){
+    scroll.insertAdjacentHTML('beforeend', `<div class="msg-row bot"><div class="avatar">${BOT_AVATAR_SVG}</div><div class="bubble">${escapeHTML(data.question)}</div></div>`);
+    scroll.scrollTop = scroll.scrollHeight;
+    return;
+  }
+
+  // Full response. Hierarchy per spec: emotion badge -> assistant message
+  // (separate card) -> Quran card (visually distinct, never mixed with
+  // AI text) -> reflection -> audio controls -> follow-up question.
+  logMood(data.emotion);
+  const excerptLabel = data.verse && data.verse.is_excerpt ? '<div class="section-sub" style="margin:6px 0 0;">(مقتطف من الآية)</div>' : '';
+  const cardId = 'chataudio-' + Date.now();
+  const favId = 'favbtn-' + Date.now();
+  const verseArRaw = data.verse.text;
+  const verseRefRaw = `سورة ${data.verse.surah_name} — الآية ${data.verse.ayah_number}`;
+  const alreadyFav = isFavorited(data.verse.id);
+  scroll.insertAdjacentHTML('beforeend', `
+    <div class="bot-result">
+      <span class="badge bg-sage">${escapeHTML(data.emotion)}</span>
+      <div class="result-block">
+        <div class="block-label">رسالة لك</div>
+        <p>${escapeHTML(data.response)}</p>
+      </div>
+      <div class="result-block quran-block">
+        <div class="block-label">آية لك</div>
+        <div class="verse-ar">﴿ ${escapeHTML(verseArRaw)} ﴾</div>
+        <span class="verse-ref">${verseRefRaw}</span>
+        ${excerptLabel}
+        <div id="${cardId}" style="margin-top:14px;"></div>
+        <div style="margin-top:10px; display:flex; gap:8px;">
+          <button class="link-btn" id="${favId}" onclick="toggleFavorite('${data.verse.id}', \`﴿ ${escapeHTML(verseArRaw)} ﴾\`, \`${verseRefRaw}\`, this)">
+            <svg viewBox="0 0 24 24" fill="${alreadyFav?'var(--rose-ink)':'none'}" stroke="var(--rose-ink)" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-9.8-9.4C.6 7.4 2.7 4 6.3 4c2 0 3.6 1.1 5.7 3.5C14.1 5.1 15.7 4 17.7 4c3.6 0 5.7 3.4 4.1 7.1-2.3 4.8-9.8 9.4-9.8 9.4Z"/></svg>
+            ${alreadyFav ? 'محفوظة في المفضلة' : 'أضف للمفضلة'}
+          </button>
+          <button class="link-btn" onclick="saveCard(\`﴿ ${escapeHTML(verseArRaw)} ﴾\`, \`${verseRefRaw}\`, \`${escapeHTML(data.response)}\`)">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="6" width="14" height="10" rx="2"/><path d="M7 18h14a2 2 0 0 0 2-2V8"/></svg>
+            حفظ في بطاقاتي
+          </button>
+        </div>
+      </div>
+      <div class="result-block reflect-block">
+        <div class="block-label">تدبر قصير</div>
+        <p>${escapeHTML(data.reflection)}</p>
+      </div>
+      <p class="followup-text">${escapeHTML(data.follow_up_question)}</p>
+    </div>`);
+  document.getElementById(cardId).innerHTML = audioPlayerHTML(data.verse.id);
+  scroll.scrollTop = scroll.scrollHeight;
+}
+function escapeHTML(s){ return s.replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "generated_at": "2026-08-17T18:58:21.556313+00:00",
+    "source_file": "data/conversations_dataset_v13.json",
+    "definition_of_genuine_multiturn": "User->Assistant->User->Assistant (>=2 user turns, >=2 assistant turns, strictly alternating, starts with user)"
+  },
+  "total_conversation_records": 1798,
+  "genuine_multiturn_count": 1798,
+  "genuine_multiturn_ratio": 1.0,
+  "turn_buckets_by_user_turns": {
+    "2-turn": 1798
+  },
+  "average_messages_per_conversation": 4,
+  "median_messages_per_conversation": 4.0,
+  "unique_user_prompts": 1883,
+  "total_user_prompts": 3596,
+  "duplicate_conversation_records": 0,
+  "emotion_distribution": {
+    "فرح وشكر": 248,
+    "حيرة وتشتت": 224,
+    "حزن": 200,
+    "قلق وتوتر": 192,
+    "وحدة": 166,
+    "ذنب وتقصير": 149,
+    "فقد وشوق": 131,
+    "شعور بالظلم": 120,
+    "ضغط نفسي": 94,
+    "غضب": 94,
+    "خوف": 94,
+    "فقدان أمل": 86
+  },
+  "source_distribution": {
+    "Sakina_V3+multiturn_bank_v13": 686,
+    "Sakina_v11_augmented+multiturn_bank_v13": 382,
+    "ArPanEmo_train+multiturn_bank_v13": 339,
+    "Sakina_v12_augmented+multiturn_bank_v13": 138,
+    "Sakina_v10_restored_original+multiturn_bank_v13": 109,
+    "Sakina_new_v10+multiturn_bank_v13": 91,
+    "Manual_Augmentation_V8+multiturn_bank_v13": 29,
+    "Sakina_v11_synonym_anchor+multiturn_bank_v13": 13,
+    "Sakina_v12_injustice_anchor+multiturn_bank_v13": 11
+  }
+}
